@@ -88,4 +88,5 @@ Create Folder
 Remove Document and Folder
     Remove Content  an-actionsmenu-page
     Remove Content  an-actionsmenu-folder
+    Log out
 
