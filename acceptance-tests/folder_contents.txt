@@ -13,7 +13,7 @@ ${CLEAR_SELECTION} =  css=#foldercontents-clearselection
 *** Test cases ***
 
 Test Select All
-    Go to homepage
+    Click Link FolderContents
     Click Contents In Edit Bar
 
     # We have 4 pages on Plone site's root
@@ -32,7 +32,7 @@ Test Select All
     Page Should Contain Element  ${SELECT_ALL}
 
 Copy Paste Element
-    Go to homepage
+    Click Link FolderContents
     Click Contents In Edit Bar
 
     Select Checkbox  css=#cb_test1
@@ -42,7 +42,7 @@ Copy Paste Element
     Page Should Contain Element  css=#folder-contents-item-copy_of_test1
 
 Cut Paste Element
-    Go to homepage
+    Click Link FolderContents
     Click Contents In Edit Bar
 
     Select Checkbox  css=#cb_test1
@@ -52,7 +52,7 @@ Cut Paste Element
     Page Should Contain Element  css=#folder-contents-item-test1
 
 Test Rename Element
-    Go to homepage
+    Click Link FolderContents
     Click Contents In Edit Bar
 
     Select Checkbox  css=#cb_test1
@@ -62,7 +62,7 @@ Test Rename Element
     Page Should Contain  TEST1
 
 Delete Element
-    Go to homepage
+    Click Link FolderContents
     Click Contents In Edit Bar
 
     Select Checkbox  css=#cb_copy_of_test1
@@ -71,7 +71,7 @@ Delete Element
     Page Should Not Contain Element  css=#folder-contents-item-copy_of_test1    
 
 Test Change Element State
-    Go to homepage
+    Click Link FolderContents
     Click Contents In Edit Bar
 
     Select Checkbox  css=#cb_test1
@@ -81,7 +81,7 @@ Test Change Element State
     Page Should Contain  Published
 
 Reorder Folder Contents
-    Go to homepage
+    Click Link FolderContents
     Click Contents In Edit Bar
 
     # Original order
@@ -141,22 +141,25 @@ Setup
     Log in  admin  admin
     Create Pages
 
+Create Folder
+    Click Link  css=li#portaltab-index_html a
+    Click Link  Folder
+    Input Text  title  FolderContents
+    Click Button  Save
+
 Create Pages
-    Go to homepage
+    Click Link FolderContents
     Add Page  test1
-    Go to homepage
+    Click Link FolderContents
     Add Page  test2
-    Go to homepage
+    Click Link FolderContents
     Add Page  test3
-    Go to homepage
+    Click Link FolderContents
     Add Page  test4
-    Go to homepage
+    Click Link FolderContents
 
 Remove Pages
-    Remove Content  test1
-    Remove Content  test2
-    Remove Content  test3
-    Remove Content  test4
+    Remove Content  foldercontents
 
 Reorder Element
     [arguments]  ${element}  ${destination}
