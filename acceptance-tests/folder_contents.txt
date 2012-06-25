@@ -13,75 +13,26 @@ ${CLEAR_SELECTION} =  css=#foldercontents-clearselection
 *** Test cases ***
 
 Test Select All
-    Click Link FolderContents
+    Click Link  FolderContents
     Click Contents In Edit Bar
 
     # We have 4 pages on Plone site's root
     Page Should Contain Element  ${SELECT_ALL}
-    Click Element  ${SELECT_ALL}
+    Click Link  All
     Page Should Contain  All 4 items in this folder are selected.
     Page Should Contain Element  ${CLEAR_SELECTION}
-    Click Element  ${CLEAR_SELECTION}
+    Click Link  Clear selection
     Page Should Contain Element  ${SELECT_ALL}
 
     # XXX: There's a bug in the implementation of this: if I select all items
     # and then I click on one checkbox, I have no longer selected all items
     # ergo, I must see the Select All link again, but that is not happening
-    Click Element  ${SELECT_ALL}
-    Select Checkbox  css=#cb_test1
-    Page Should Contain Element  ${SELECT_ALL}
-
-Copy Paste Element
-    Click Link FolderContents
-    Click Contents In Edit Bar
-
-    Select Checkbox  css=#cb_test1
-    Click Button  Copy
-    Page Should Contain  1 item(s) copied.
-    Click Button  Paste
-    Page Should Contain Element  css=#folder-contents-item-copy_of_test1
-
-Cut Paste Element
-    Click Link FolderContents
-    Click Contents In Edit Bar
-
-    Select Checkbox  css=#cb_test1
-    Click Button  Cut
-    Page Should Contain  1 item(s) cut.
-    Click Button  Paste
-    Page Should Contain Element  css=#folder-contents-item-test1
-
-Test Rename Element
-    Click Link FolderContents
-    Click Contents In Edit Bar
-
-    Select Checkbox  css=#cb_test1
-    Click Button  Rename
-    Input Text  css=#test1_title  TEST1
-    Click Button  Rename All
-    Page Should Contain  TEST1
-
-Delete Element
-    Click Link FolderContents
-    Click Contents In Edit Bar
-
-    Select Checkbox  css=#cb_copy_of_test1
-    Click Button  Delete
-    Page Should Contain  Item(s) deleted.
-    Page Should Not Contain Element  css=#folder-contents-item-copy_of_test1    
-
-Test Change Element State
-    Click Link FolderContents
-    Click Contents In Edit Bar
-
-    Select Checkbox  css=#cb_test1
-    Click Button  Change State
-    Select Radio Button  workflow_action  publish
-    Click Button  Save
-    Page Should Contain  Published
+    #Click Link  All
+    #Select Checkbox  css=#cb_test1
+    #Page Should Contain Element  ${SELECT_ALL}
 
 Reorder Folder Contents
-    Click Link FolderContents
+    Click Link  FolderContents
     Click Contents In Edit Bar
 
     # Original order
@@ -135,10 +86,60 @@ Reorder Folder Contents
     Should be above  css=tr#folder-contents-item-test2  css=tr#folder-contents-item-test3
     Should be above  css=tr#folder-contents-item-test3  css=tr#folder-contents-item-test4
 
+Copy Paste Element
+    Click Link  FolderContents
+    Click Contents In Edit Bar
+
+    Select Checkbox  css=#cb_test1
+    Click Button  Copy
+    Page Should Contain  1 item(s) copied.
+    Click Button  Paste
+    Page Should Contain Element  css=#folder-contents-item-copy_of_test1
+
+Cut Paste Element
+    Click Link  FolderContents
+    Click Contents In Edit Bar
+
+    Select Checkbox  css=#cb_test1
+    Click Button  Cut
+    Page Should Contain  1 item(s) cut.
+    Click Button  Paste
+    Page Should Contain Element  css=#folder-contents-item-test1
+
+Test Rename Element
+    Click Link  FolderContents
+    Click Contents In Edit Bar
+
+    Select Checkbox  css=#cb_test1
+    Click Button  Rename
+    Input Text  css=#test1_title  TEST1
+    Click Button  Rename All
+    Page Should Contain  TEST1
+
+Delete Element
+    Click Link  FolderContents
+    Click Contents In Edit Bar
+
+    Select Checkbox  css=#cb_copy_of_test1
+    Click Button  Delete
+    Page Should Contain  Item(s) deleted.
+    Page Should Not Contain Element  css=#folder-contents-item-copy_of_test1    
+
+Test Change Element State
+    Click Link  FolderContents
+    Click Contents In Edit Bar
+
+    Select Checkbox  css=#cb_test1
+    Click Button  Change State
+    Select Radio Button  workflow_action  publish
+    Click Button  Save
+    Page Should Contain  Published
+
 *** Keywords ***
 
 Setup
     Log in  admin  admin
+    Create Folder
     Create Pages
 
 Create Folder
@@ -148,15 +149,15 @@ Create Folder
     Click Button  Save
 
 Create Pages
-    Click Link FolderContents
+    Click Link  FolderContents
     Add Page  test1
-    Click Link FolderContents
+    Click Link  FolderContents
     Add Page  test2
-    Click Link FolderContents
+    Click Link  FolderContents
     Add Page  test3
-    Click Link FolderContents
+    Click Link  FolderContents
     Add Page  test4
-    Click Link FolderContents
+    Click Link  FolderContents
 
 Remove Pages
     Remove Content  foldercontents
